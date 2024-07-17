@@ -1,4 +1,4 @@
-package com.alpermelkeli.weatherapp.repository
+package com.alpermelkeli.weatherapp.repository.weather
 
 data class WeatherResponse(
     val main: Main,

@@ -1,5 +1,7 @@
 package com.alpermelkeli.weatherapp.navigation
 
+import android.app.Application
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.alpermelkeli.weatherapp.viewmodel.WeatherViewModel

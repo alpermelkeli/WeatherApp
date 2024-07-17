@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TopBar(onClick:()->Unit){
+fun TopBar(selectedLocation:String, onClickNotification:()->Unit, onClickSelectLocation:()->Unit){
     Row(modifier = Modifier
         .fillMaxWidth()
         .height(100.dp)
@@ -40,21 +40,22 @@ fun TopBar(onClick:()->Unit){
                 modifier = Modifier.size(50.dp))
             Spacer(modifier = Modifier.width(15.dp))
 
-            Text(text = "Yozgat",
+            Text(text = selectedLocation,
                 fontSize = 20.sp,
                 color = Color.White,
-                modifier = Modifier.clickable { onClick() }
+                modifier = Modifier.clickable { onClickSelectLocation() }
             )
             Spacer(modifier = Modifier.width(15.dp))
 
             Icon(imageVector = Icons.Default.KeyboardArrowDown,
                 contentDescription = "Select Location",
                 tint = Color.White,
-                modifier = Modifier.clickable { onClick() }
+                modifier = Modifier.clickable { onClickSelectLocation() }
             )
         }
         Icon(imageVector = Icons.Default.Notifications, contentDescription = "Notification",
-            modifier = Modifier.padding(end = 15.dp).size(35.dp), tint = Color.White)
+            modifier = Modifier.padding(end = 15.dp).size(35.dp)
+                .clickable { onClickNotification() }, tint = Color.White)
     }
 
 }
