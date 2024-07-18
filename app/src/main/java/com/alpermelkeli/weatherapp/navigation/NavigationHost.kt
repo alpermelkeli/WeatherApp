@@ -14,6 +14,6 @@ fun NavigationHost(navController: NavHostController, weatherViewModel: WeatherVi
     NavHost(navController = navController, startDestination = "HomePage") {
         composable("HomePage") { HomePage(navController = navController, weatherViewModel) }
         composable("ForecastReport"){ ForecastReport() }
-        composable("SelectLocation"){ SelectLocation(weatherViewModel) }
+        composable("SelectLocation"){ SelectLocation(weatherViewModel, navController = navController) }
     }
 }
