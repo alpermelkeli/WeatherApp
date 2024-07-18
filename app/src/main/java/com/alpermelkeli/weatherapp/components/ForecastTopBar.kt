@@ -1,6 +1,7 @@
 package com.alpermelkeli.weatherapp.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,9 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@Preview(showBackground = true)
 @Composable
-fun ForecastTopBar(){
+fun ForecastTopBar(onClickBack:()->Unit){
     Row(modifier = Modifier
         .background(Color.Transparent)
         .fillMaxWidth()
@@ -34,7 +34,7 @@ fun ForecastTopBar(){
         verticalAlignment = Alignment.CenterVertically){
         Row(modifier = Modifier.fillMaxHeight(),verticalAlignment = Alignment.CenterVertically) {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back",
-                tint = Color.White)
+                tint = Color.White, modifier = Modifier.clickable { onClickBack() })
             Spacer(modifier = Modifier.width(5.dp))
             Text(text = "Back",
                 fontSize = 24.sp,

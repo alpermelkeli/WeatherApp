@@ -34,6 +34,7 @@ import androidx.navigation.NavHostController
 import com.alpermelkeli.weatherapp.R
 import com.alpermelkeli.weatherapp.components.DayDetails
 import com.alpermelkeli.weatherapp.components.HomeTopBar
+import com.alpermelkeli.weatherapp.repository.getImageVectorIdByName
 import com.alpermelkeli.weatherapp.repository.location.LocationStorage
 import com.alpermelkeli.weatherapp.ui.theme.background
 import com.alpermelkeli.weatherapp.viewmodel.WeatherViewModel
@@ -69,7 +70,7 @@ fun HomePage(navController: NavHostController, weatherViewModel: WeatherViewMode
             }
 
             weatherState?.let {
-                Image(painter = rememberVectorPainter(image = ImageVector.vectorResource(id = R.drawable.cloudy_vector)),
+                Image(painter = rememberVectorPainter(image = ImageVector.vectorResource(id = getImageVectorIdByName(it.situation))),
                     contentDescription = null,
                     modifier = Modifier.size(200.dp))
 

@@ -70,6 +70,7 @@ class WeatherRepository {
                 override fun onResponse(call: Call<HourlyWeatherResponse>, response: Response<HourlyWeatherResponse>) {
                     if (response.isSuccessful) {
                         val hourlyWeatherResponse = response.body()
+                        println(hourlyWeatherResponse)
                         if (hourlyWeatherResponse != null) {
                             val hourlyWeatherList = hourlyWeatherResponse.list.map { item ->
                                 val timeString = item.dt_txt.split(" ")[1]

@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
@@ -32,6 +33,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.alpermelkeli.weatherapp.repository.location.LocationStorage
+import com.alpermelkeli.weatherapp.ui.theme.Blue1
+import com.alpermelkeli.weatherapp.ui.theme.Blue2
+import com.alpermelkeli.weatherapp.ui.theme.Grey1
+import com.alpermelkeli.weatherapp.ui.theme.GreyContainer
 import com.alpermelkeli.weatherapp.ui.theme.background
 import com.alpermelkeli.weatherapp.viewmodel.WeatherViewModel
 
@@ -63,11 +68,11 @@ fun SelectLocation(weatherViewModel: WeatherViewModel,navController: NavHostCont
                     .size(20.dp)
                     .clickable { navController.popBackStack() })},
                 shape = ShapeDefaults.Medium,
-                colors = TextFieldDefaults.colors().copy(unfocusedIndicatorColor = Color.Transparent, focusedIndicatorColor = Color.Transparent),
+                colors = TextFieldDefaults.colors().copy(unfocusedIndicatorColor = Color.Transparent, focusedIndicatorColor = Color.Transparent, unfocusedContainerColor = GreyContainer, focusedContainerColor = GreyContainer, cursorColor = Blue2, focusedTextColor = Color.Black, unfocusedTextColor = Color.Black),
                 )
             Spacer(modifier = Modifier.height(50.dp))
 
-            Button(onClick = { weatherViewModel.updateDayWeather(cityText) }) {
+            Button(onClick = { weatherViewModel.updateDayWeather(cityText) }, colors = ButtonDefaults.buttonColors().copy(containerColor = GreyContainer, contentColor = Color.White)) {
                 Text(text = "Select")
             }
         }

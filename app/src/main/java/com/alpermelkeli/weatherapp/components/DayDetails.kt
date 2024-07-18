@@ -18,9 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.alpermelkeli.weatherapp.R
 import com.alpermelkeli.weatherapp.model.DailyWeather
 import com.alpermelkeli.weatherapp.repository.millisToDate
 import com.alpermelkeli.weatherapp.ui.theme.containerBackground
@@ -46,46 +49,48 @@ fun DayDetails(dailyWeather: DailyWeather){
         Text(text = dailyWeather.situation,
             fontSize = 15.sp,
             color = Color.White)
-        Column {
+        Column(modifier = Modifier.fillMaxWidth(0.5f), verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically) {
+                Icon(imageVector = ImageVector.vectorResource(id = R.drawable.wind), contentDescription = "Wind",
+                    tint = Color.White)
+                Spacer(modifier = Modifier.width(30.dp))
+                Text(text = "Wind", color = Color.White)
+                Spacer(modifier = Modifier.width(15.dp))
+                Spacer(modifier = Modifier
+                    .background(Color.White)
+                    .height(15.dp)
+                    .width(1.dp))
+                Spacer(modifier = Modifier.width(15.dp))
+                Text(text = dailyWeather.wind.toString()+" km/h",
+                    color = Color.White,)
+            }
+            Spacer(modifier = Modifier.height(7.dp))
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically) {
+                Icon(imageVector = ImageVector.vectorResource(id = R.drawable.humidity), contentDescription = "Wind",
+                    tint = Color.White)
+                Spacer(modifier = Modifier.width(5.dp))
+                Text(text = "Hum", color = Color.White)
+                Spacer(modifier = Modifier
+                    .background(Color.White)
+                    .height(15.dp)
+                    .width(1.dp))
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(text = dailyWeather.hum.toString()+" %",
+                    color = Color.White,)
+            }
+        }
 
-        }
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .height(30.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically) {
-            Icon(imageVector = Icons.Default.Face, contentDescription = "Wind",
-                tint = Color.White)
-            Spacer(modifier = Modifier.width(15.dp))
-            Text(text = "Wind", color = Color.White)
-            Spacer(modifier = Modifier.width(15.dp))
-            Spacer(modifier = Modifier
-                .background(Color.White)
-                .height(15.dp)
-                .width(1.dp))
-            Spacer(modifier = Modifier.width(15.dp))
-            Text(text = dailyWeather.wind.toString()+" km/h",
-                color = Color.White,)
-        }
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .height(30.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically) {
-            Icon(imageVector = Icons.Default.Face, contentDescription = "Wind",
-                tint = Color.White)
-            Spacer(modifier = Modifier.width(15.dp))
-            Text(text = "Hum", color = Color.White)
-            Spacer(modifier = Modifier.width(15.dp))
-            Spacer(modifier = Modifier
-                .background(Color.White)
-                .height(15.dp)
-                .width(1.dp))
-            Spacer(modifier = Modifier.width(15.dp))
-            Text(text = dailyWeather.hum.toString()+" %",
-                color = Color.White,)
-        }
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(1.dp))
+
 
 
 

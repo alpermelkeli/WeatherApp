@@ -18,10 +18,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alpermelkeli.weatherapp.R
 import com.alpermelkeli.weatherapp.model.HourlyWeather
+import com.alpermelkeli.weatherapp.repository.getImageVectorIdByName
 
 @Composable
 fun HourDetails(hourlyWeather: HourlyWeather){
@@ -38,7 +38,7 @@ fun HourDetails(hourlyWeather: HourlyWeather){
                 modifier = Modifier.padding(start = 5.dp),
                 color = Color.White)
 
-            Image(painter = rememberVectorPainter(image = ImageVector.vectorResource(id = R.drawable.sunny_vector)), contentDescription = "Image",
+            Image(painter = rememberVectorPainter(image = ImageVector.vectorResource(id = getImageVectorIdByName(hourlyWeather.situation))), contentDescription = "Image",
                 modifier = Modifier.size(40.dp))
 
             Text(text = hourlyWeather.hour,

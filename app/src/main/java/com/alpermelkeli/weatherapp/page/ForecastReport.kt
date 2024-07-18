@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.alpermelkeli.weatherapp.components.ForecastTopBar
 import com.alpermelkeli.weatherapp.components.HourDetails
 import com.alpermelkeli.weatherapp.repository.millisToDate
@@ -33,7 +34,7 @@ import com.alpermelkeli.weatherapp.ui.theme.background
 import com.alpermelkeli.weatherapp.viewmodel.WeatherViewModel
 
 @Composable
-fun ForecastReport(weatherViewModel: WeatherViewModel) {
+fun ForecastReport(weatherViewModel: WeatherViewModel,navController: NavHostController) {
     LaunchedEffect(Unit) {
         weatherViewModel.getHourlyWeather()
     }
@@ -47,7 +48,9 @@ fun ForecastReport(weatherViewModel: WeatherViewModel) {
             .fillMaxSize()
             .padding(20.dp)) {
             Spacer(modifier = Modifier.height(10.dp))
-            ForecastTopBar()
+            ForecastTopBar {
+                navController.popBackStack()
+            }
             Spacer(modifier = Modifier.height(40.dp))
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
