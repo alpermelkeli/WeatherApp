@@ -1,13 +1,17 @@
 package com.alpermelkeli.weatherapp.repository
 
-import android.content.Context
 import com.alpermelkeli.weatherapp.model.Location
-import com.alpermelkeli.weatherapp.model.Weather
-import com.alpermelkeli.weatherapp.repository.location.LocationDatabaseHelper
+import com.alpermelkeli.weatherapp.model.DailyWeather
+import com.alpermelkeli.weatherapp.model.HourlyWeather
 import com.alpermelkeli.weatherapp.repository.location.LocationStorage
+import com.alpermelkeli.weatherapp.repository.weather.HourlyWeatherResponse
 import com.alpermelkeli.weatherapp.repository.weather.WeatherApiService
 import com.alpermelkeli.weatherapp.repository.weather.WeatherResponse
+import com.alpermelkeli.weatherapp.viewmodel.WeatherViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,7 +24,7 @@ class WeatherRepository {
     private val weatherApiService = RetrofitClient.weatherApiService
     private val apiKey = "991f636434365599f64c110ed496cee7"
 
-    suspend fun getWeather(callback: (Weather?) -> Unit) {
+    suspend fun getDailyWeather(callback: (DailyWeather?) -> Unit) {
         val location = withContext(Dispatchers.IO) {
             LocationStorage.getLocation()
         }
@@ -32,13 +36,13 @@ class WeatherRepository {
                     if (response.isSuccessful) {
                         val weatherResponse = response.body()
                         if (weatherResponse != null) {
-                            val weather = Weather(
+                            val dailyWeather = DailyWeather(
                                 degree = (weatherResponse.main.temp - 273.15).toInt(), // Kelvin to Celsius
                                 situation = weatherResponse.weather[0].description,
                                 wind = weatherResponse.wind.speed.toInt(),
                                 hum = weatherResponse.main.humidity
                             )
-                            callback(weather)
+                            callback(dailyWeather)
                         } else {
                             callback(null)
                         }
@@ -48,6 +52,44 @@ class WeatherRepository {
                 }
 
                 override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+                    callback(null)
+                }
+            })
+        } ?: run {
+            callback(null)
+        }
+    }
+
+    suspend fun getHourlyWeather(callback: (List<HourlyWeather>?) -> Unit) {
+        val location = withContext(Dispatchers.IO) {
+            LocationStorage.getLocation()
+        }
+        location?.let {
+            val call = weatherApiService.getHourlyWeather(it.city, apiKey)
+            call.enqueue(object : Callback<HourlyWeatherResponse> {
+                override fun onResponse(call: Call<HourlyWeatherResponse>, response: Response<HourlyWeatherResponse>) {
+                    if (response.isSuccessful) {
+                        val hourlyWeatherResponse = response.body()
+                        if (hourlyWeatherResponse != null) {
+                            val hourlyWeatherList = hourlyWeatherResponse.list.map { item ->
+                                val timeString = item.dt_txt.split(" ")[1]
+                                val formattedTime = formatTime(timeString)
+                                HourlyWeather(
+                                    degree = (item.main.temp - 273.15).toInt(), // Kelvin to Celsius
+                                    situation = item.weather[0].description,
+                                    hour = formattedTime
+                                )
+                            }
+                            callback(hourlyWeatherList)
+                        } else {
+                            callback(null)
+                        }
+                    } else {
+                        callback(null)
+                    }
+                }
+
+                override fun onFailure(call: Call<HourlyWeatherResponse>, t: Throwable) {
                     callback(null)
                 }
             })

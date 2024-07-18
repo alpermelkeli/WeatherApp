@@ -30,11 +30,10 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavHostController
 import com.alpermelkeli.weatherapp.R
 import com.alpermelkeli.weatherapp.components.DayDetails
-import com.alpermelkeli.weatherapp.components.TopBar
+import com.alpermelkeli.weatherapp.components.HomeTopBar
 import com.alpermelkeli.weatherapp.repository.location.LocationStorage
 import com.alpermelkeli.weatherapp.ui.theme.background
 import com.alpermelkeli.weatherapp.viewmodel.WeatherViewModel
@@ -42,7 +41,7 @@ import com.alpermelkeli.weatherapp.viewmodel.WeatherViewModel
 @Composable
 fun HomePage(navController: NavHostController, weatherViewModel: WeatherViewModel){
 
-    val weatherState by weatherViewModel.dayWeather.observeAsState()
+    val weatherState by weatherViewModel.dailyWeather.observeAsState()
 
     var selectedLocation by remember{ mutableStateOf("Select Location") }
 
@@ -65,7 +64,7 @@ fun HomePage(navController: NavHostController, weatherViewModel: WeatherViewMode
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween) {
 
-            TopBar(selectedLocation, onClickNotification = {notificationDialogState = true}) {
+            HomeTopBar(selectedLocation, onClickNotification = {notificationDialogState = true}) {
                 navController.navigate("SelectLocation")
             }
 
@@ -74,7 +73,7 @@ fun HomePage(navController: NavHostController, weatherViewModel: WeatherViewMode
                     contentDescription = null,
                     modifier = Modifier.size(200.dp))
 
-                DayDetails(weather = it)
+                DayDetails(dailyWeather = it)
 
                 Button(onClick = { navController.navigate("ForecastReport") },
                     modifier = Modifier

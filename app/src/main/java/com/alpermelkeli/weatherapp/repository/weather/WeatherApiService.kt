@@ -10,4 +10,9 @@ interface WeatherApiService {
         @Query("q") city: String,
         @Query("appid") apiKey: String
     ): Call<WeatherResponse>
+    @GET("data/2.5/forecast")
+    fun getHourlyWeather(
+        @Query("q") city: String,
+        @Query("appid") apiKey: String
+    ): Call<HourlyWeatherResponse>
 }

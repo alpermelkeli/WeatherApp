@@ -13,7 +13,7 @@ import com.alpermelkeli.weatherapp.viewmodel.WeatherViewModel
 fun NavigationHost(navController: NavHostController, weatherViewModel: WeatherViewModel){
     NavHost(navController = navController, startDestination = "HomePage") {
         composable("HomePage") { HomePage(navController = navController, weatherViewModel) }
-        composable("ForecastReport"){ ForecastReport() }
+        composable("ForecastReport"){ ForecastReport(weatherViewModel = weatherViewModel) }
         composable("SelectLocation"){ SelectLocation(weatherViewModel, navController = navController) }
     }
 }

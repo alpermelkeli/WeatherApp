@@ -17,16 +17,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alpermelkeli.weatherapp.model.Weather
+import com.alpermelkeli.weatherapp.model.DailyWeather
+import com.alpermelkeli.weatherapp.repository.millisToDate
 import com.alpermelkeli.weatherapp.ui.theme.containerBackground
 
 @Composable
-fun DayDetails(weather: Weather){
+fun DayDetails(dailyWeather: DailyWeather){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,15 +35,15 @@ fun DayDetails(weather: Weather){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally)
     {
-        Text(text = "Today, 17 July",
+        Text(text = "Today, "+millisToDate(System.currentTimeMillis()) ,
             color = Color.White,
             modifier = Modifier.padding(top = 20.dp))
 
-        Text(text = weather.degree.toString() + "°",
+        Text(text = dailyWeather.degree.toString() + "°",
             fontSize = 70.sp,
             modifier = Modifier.padding(start = 25.dp),
             color = Color.White)
-        Text(text = weather.situation,
+        Text(text = dailyWeather.situation,
             fontSize = 15.sp,
             color = Color.White)
         Column {
@@ -64,7 +64,7 @@ fun DayDetails(weather: Weather){
                 .height(15.dp)
                 .width(1.dp))
             Spacer(modifier = Modifier.width(15.dp))
-            Text(text = weather.wind.toString()+" km/h",
+            Text(text = dailyWeather.wind.toString()+" km/h",
                 color = Color.White,)
         }
         Row(modifier = Modifier
@@ -82,7 +82,7 @@ fun DayDetails(weather: Weather){
                 .height(15.dp)
                 .width(1.dp))
             Spacer(modifier = Modifier.width(15.dp))
-            Text(text = weather.hum.toString()+" %",
+            Text(text = dailyWeather.hum.toString()+" %",
                 color = Color.White,)
         }
         Spacer(modifier = Modifier.height(5.dp))
@@ -93,8 +93,11 @@ fun DayDetails(weather: Weather){
 
 
 }
+
+
+
 @Preview
 @Composable
 fun DayDetailsPreview(){
-    DayDetails(weather = Weather(29, "Cloudy", 10, 27))
+    DayDetails(dailyWeather = DailyWeather(29, "Cloudy", 10, 27))
 }

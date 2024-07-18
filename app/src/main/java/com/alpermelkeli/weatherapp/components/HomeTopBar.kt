@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TopBar(selectedLocation:String, onClickNotification:()->Unit, onClickSelectLocation:()->Unit){
+fun HomeTopBar(selectedLocation:String, onClickNotification:()->Unit, onClickSelectLocation:()->Unit){
     Row(modifier = Modifier
         .fillMaxWidth()
         .height(100.dp)

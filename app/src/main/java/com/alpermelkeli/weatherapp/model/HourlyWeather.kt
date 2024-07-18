@@ -1,8 +1,7 @@
 package com.alpermelkeli.weatherapp.model
 
-data class Weather(
+data class HourlyWeather(
     val degree:Int,
     val situation:String,
-    val wind:Int,
-    val hum:Int
+    val hour:String
 )
