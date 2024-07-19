@@ -19,12 +19,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import com.alpermelkeli.weatherapp.R
 import com.alpermelkeli.weatherapp.model.HourlyWeather
-import com.alpermelkeli.weatherapp.repository.getImageVectorIdByName
+import com.alpermelkeli.weatherapp.repository.getImageVectorIdByIconName
 
 @Composable
-fun HourDetails(hourlyWeather: HourlyWeather){
+fun HourDetailsItem(hourlyWeather: HourlyWeather){
     Box(modifier = Modifier
         .background(Color.Transparent)
         .height(100.dp)
@@ -38,7 +37,7 @@ fun HourDetails(hourlyWeather: HourlyWeather){
                 modifier = Modifier.padding(start = 5.dp),
                 color = Color.White)
 
-            Image(painter = rememberVectorPainter(image = ImageVector.vectorResource(id = getImageVectorIdByName(hourlyWeather.situation))), contentDescription = "Image",
+            Image(painter = rememberVectorPainter(image = ImageVector.vectorResource(id = getImageVectorIdByIconName(hourlyWeather.icon))), contentDescription = "Image",
                 modifier = Modifier.size(40.dp))
 
             Text(text = hourlyWeather.hour,

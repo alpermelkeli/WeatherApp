@@ -40,7 +40,8 @@ class WeatherRepository {
                                 degree = (weatherResponse.main.temp - 273.15).toInt(), // Kelvin to Celsius
                                 situation = weatherResponse.weather[0].description,
                                 wind = weatherResponse.wind.speed.toInt(),
-                                hum = weatherResponse.main.humidity
+                                hum = weatherResponse.main.humidity,
+                                icon = weatherResponse.weather[0].icon
                             )
                             callback(dailyWeather)
                         } else {
@@ -78,7 +79,8 @@ class WeatherRepository {
                                 HourlyWeather(
                                     degree = (item.main.temp - 273.15).toInt(), // Kelvin to Celsius
                                     situation = item.weather[0].description,
-                                    hour = formattedTime
+                                    hour = formattedTime,
+                                    icon = item.weather[0].icon
                                 )
                             }
                             callback(hourlyWeatherList)

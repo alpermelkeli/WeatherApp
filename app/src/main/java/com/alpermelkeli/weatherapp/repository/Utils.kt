@@ -16,17 +16,17 @@ fun formatTime(time: String): String {
     val date = inputFormat.parse(time)
     return outputFormat.format(date)
 }
-fun getImageVectorIdByName(situation:String):Int{
-    when(situation){
-        "clear sky" ->return R.drawable.clear_sky
-        "broken clouds" -> return R.drawable.broken_clouds
-        "few clouds" -> return R.drawable.few_clouds
-        "mist","smoke","haze","sand/dust whirls","fog","sand","dust","volcanic ash","squalls","tornado" -> return R.drawable.mist
-        "rain","light rain","moderate rain","heavy intensity rain","very heavy rain","extreme rain","freezing rain","light intensity shower rain","shower rain","heavy intensity shower rain","ragged shower rain" -> return R.drawable.rain
-        "scattered clouds","overcast clouds" -> return R.drawable.scattered_clouds
-        "shower rain" -> return R.drawable.shower_rain
-        "snow","light snow","heavy snow","sleet","light shower sleet","shower sleet","light rain and snow","rain and snow","light shower snow","shower snow","heavy shower snow" ->return R.drawable.snow
-        "thunderstorm" ->return R.drawable.thunderstorm
+fun getImageVectorIdByIconName(iconName:String):Int{
+    when(iconName){
+        "01d","01n" ->return R.drawable.clear_sky
+        "04d","04n" -> return R.drawable.broken_clouds
+        "02d","02n" -> return R.drawable.few_clouds
+        "50d","50n" -> return R.drawable.mist
+        "10d","10n"-> return R.drawable.rain
+        "03d","03n" -> return R.drawable.scattered_clouds
+        "09d","09n" -> return R.drawable.shower_rain
+        "13d","13n" ->return R.drawable.snow
+        "11d","11n" ->return R.drawable.thunderstorm
     }
     return R.drawable.ic_launcher_foreground
 }

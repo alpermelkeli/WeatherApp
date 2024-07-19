@@ -15,5 +15,6 @@ data class MainHourly(
 )
 
 data class Weather(
-    val description: String
+    val description: String,
+    val icon:String
 )

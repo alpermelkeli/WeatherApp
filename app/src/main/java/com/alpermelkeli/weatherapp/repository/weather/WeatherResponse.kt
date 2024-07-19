@@ -12,7 +12,8 @@ data class Main(
 )
 
 data class WeatherDescription(
-    val description: String
+    val description: String,
+    val icon:String
 )
 
 data class Wind(

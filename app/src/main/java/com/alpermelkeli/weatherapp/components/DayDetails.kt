@@ -104,5 +104,6 @@ fun DayDetails(dailyWeather: DailyWeather){
 @Preview
 @Composable
 fun DayDetailsPreview(){
-    DayDetails(dailyWeather = DailyWeather(29, "Cloudy", 10, 27))
+    DayDetails(dailyWeather = DailyWeather(29, "Cloudy", 10, 27,
+        "10n"))
 }
